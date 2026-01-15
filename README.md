@@ -6,6 +6,12 @@
 
 # Laravel Failed Jobs
 
+👉 Laravel-Failed-Jobs gives you a Horizon-like dashboard just for failed jobs, even **when you’re not using Redis or Horizon**.
+
+👉 It reads directly from the failed_jobs table and lets you see **payloads**, **exceptions**, and **details clearly in a UI**, instead of digging through the database.
+
+👉 View only (no retry/delete management), works with any queue driver, and can run **locally or remotely** from another Laravel app.
+
 ## Introduction:
 
 If you're running an application with a queue driver other than Redis or dispatch a job to 
