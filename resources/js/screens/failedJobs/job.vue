@@ -69,6 +69,10 @@ export default {
                     <div class="col-md-2"><strong>ID</strong></div>
                     <div class="col">{{ job.id }}</div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col-md-2"><strong>UUID</strong></div>
+                    <div class="col">{{ job.uuid }}</div>
+                </div>
 
                 <div class="row mb-2">
                     <div class="col-md-2"><strong>Queue</strong></div>
