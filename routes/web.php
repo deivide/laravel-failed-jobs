@@ -6,6 +6,7 @@ Route::prefix('api')->group(function () {
     // Job Routes...
     Route::get('/', 'FailedJobsController@index')->name('failed-jobs.index');
     Route::get('/{id}', 'FailedJobsController@show')->name('failed-jobs.show');
+    Route::post('/{id}/retry', 'FailedJobsController@retry')->name('failed-jobs.retry');
 });
 
 // Catch-all Route...
