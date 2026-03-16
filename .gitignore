@@ -1,7 +1,11 @@
 /vendor
 /laravel
 /node_modules
+/public/app.js
 /public/app.js.LICENSE.txt
+/public/app.css
+/public/app-dark.css
+/public/mix-manifest.json
 /phpunit.xml
 composer.lock
 .phpunit.result.cache
