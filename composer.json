@@ -1,12 +1,18 @@
 {
-    "name": "hpwebdeveloper/laravel-failed-jobs",
-    "description": "UI for Laravel failed jobs.",
-    "keywords": ["laravel", "failed", "jobs"],
+    "name": "deivide/laravel-failed-jobs",
+    "description": "UI for Laravel failed jobs with retry support. Fork of hpwebdeveloper/laravel-failed-jobs.",
+    "keywords": ["laravel", "failed", "jobs", "retry", "queue"],
     "license": "MIT",
     "authors": [
         {
+            "name": "Deivide Vian",
+            "email": "dvdvian@gmail.com",
+            "role": "Maintainer"
+        },
+        {
             "name": "Hamed Panjeh",
-            "email": "panjeh@gmail.com"
+            "email": "panjeh@gmail.com",
+            "role": "Original Author"
         }
     ],
     "require": {
