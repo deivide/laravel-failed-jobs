@@ -1,16 +1,12 @@
-<p align="center">
-<a href="https://github.com/HPWebdeveloper/laravel-failed-jobs/actions"><img src="https://github.com/HPWebdeveloper/laravel-failed-jobs/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/HPWebdeveloper/laravel-failed-jobs"><img src="https://img.shields.io/packagist/v/HPWebdeveloper/laravel-failed-jobs" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/HPWebdeveloper/laravel-failed-jobs"><img src="https://img.shields.io/packagist/l/HPWebdeveloper/laravel-failed-jobs" alt="License"></a>
-</p>
-
 # Laravel Failed Jobs
 
-👉 Laravel-Failed-Jobs gives you a Horizon-like dashboard just for failed jobs, even **when you’re not using Redis or Horizon**.
+> Fork of [hpwebdeveloper/laravel-failed-jobs](https://github.com/HPWebdeveloper/laravel-failed-jobs) with added retry support.
 
-👉 It reads directly from the failed_jobs table and lets you see **payloads**, **exceptions**, and **details clearly in a UI**, instead of digging through the database.
+Laravel-Failed-Jobs gives you a Horizon-like dashboard just for failed jobs, even **when you’re not using Redis or Horizon**.
 
-👉 View only (no retry/delete management), works with any queue driver, and can run **locally or remotely** from another Laravel app.
+- Reads directly from the `failed_jobs` table and lets you see **payloads**, **exceptions**, and **details clearly in a UI**
+- **Retry failed jobs** directly from the dashboard — both from the listing and the detail page
+- Works with any queue driver, and can run **locally or remotely** from another Laravel app
 
 ## Introduction:
 
@@ -48,9 +44,9 @@ is not applicable.
 Remote mode enables access to the main application from a separate Laravel application, 
 hosted on a distinct URL address, in both local and production environments.
 
-As you correctly understood, it's important to note that the Laravel-Failed-Jobs package focuses 
-solely on enhancing the visualization of failed jobs and does not offer managing of failed jobs or 
-the comprehensive set of robust features found in Laravel Horizon.
+This fork adds the ability to **retry failed jobs** directly from the dashboard UI.
+While it doesn't offer the comprehensive set of robust features found in Laravel Horizon,
+it provides a simple and effective way to visualize and retry failed jobs.
 
 ## I - Installation (basic mode):
 If you have already installed Laravel Horizon, you can still install Laravel-Failed-Jobs without any conflict.
@@ -59,7 +55,7 @@ Also it follows the same installation process as Laravel Horizon.
 You may install Laravel-Failed-Jobs package into your project using the Composer package manager:
 
 ```bash
-composer require hpwebdeveloper/laravel-failed-jobs
+composer require deivide/laravel-failed-jobs
 ```
 
 After installing Laravel-Failed-Jobs, publish the assets using the `failedjobs:install` Artisan command.
@@ -106,7 +102,7 @@ You may install the Laravel-Failed-Jobs package into your project using the comp
 
 Note: currently the remote feature is under `feature/remote-connect` branch.
 ```bash
-composer require hpwebdeveloper/laravel-failed-jobs:dev-feature/remote-connect
+composer require deivide/laravel-failed-jobs:dev-feature/remote-connect
 ```
 Then install the assets using the `failedjobs:install` Artisan command.
 ```bash
@@ -168,12 +164,18 @@ While you can access the dashboard in the local environment through this URL: `h
 Of course you can access the dashboard in the main application 
 if you set the `axios_base_url` variable in the main application `.env` file as well.
 
+## Credits
+
+This package is a fork of [hpwebdeveloper/laravel-failed-jobs](https://github.com/HPWebdeveloper/laravel-failed-jobs) by [Hamed Panjeh](https://github.com/HPWebdeveloper).
+
+**Changes in this fork:**
+- Added retry functionality (retry button on listing and detail pages)
+
 ## Licensing
 
-This repository uses two licenses:
+This repository is distributed under the MIT License (MIT).
 
-- The original codebase is distributed under the MIT License (MIT) (Copyright (c) Taylor Otwell), 
-which you can find in the [LICENSE](https://github.com/HPWebdeveloper/laravel-failed-jobs/blob/main/LICENSE.md) file.
+- The original codebase: Copyright (c) Taylor Otwell / Hamed Panjeh
+- Fork modifications: Copyright (c) Deivide Vian
 
-- Any modifications made to the original codebase are subject to our own license, 
-which you can find in the [LICENSE](https://github.com/HPWebdeveloper/laravel-failed-jobs/blob/main/LICENSE.md) file.
+See the [LICENSE](LICENSE.md) file for details.
