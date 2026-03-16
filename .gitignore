@@ -6,3 +6,5 @@
 composer.lock
 .phpunit.result.cache
 .idea
+.claude
+_bmad*
