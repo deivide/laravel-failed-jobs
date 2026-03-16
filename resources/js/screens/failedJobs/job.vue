@@ -36,6 +36,19 @@ export default {
             } catch (err) {
                 return data;
             }
+        },
+
+        retryJob() {
+            this.$http.post(FailedJobs.basePath + '/api/' + this.job.uuid + '/retry')
+                .then(() => {
+                    this.$router.push('/');
+                })
+                .catch(error => {
+                    let message = error.response && error.response.data
+                        ? error.response.data.message
+                        : 'Failed to retry job.';
+                    alert(message);
+                });
         }
     }
 }
@@ -49,6 +62,7 @@ export default {
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 v-if="!ready">Job Preview</h5>
                 <h5 v-if="ready">{{ job.payload.displayName }}</h5>
+                <button v-if="ready" class="btn btn-outline-primary btn-sm" @click.prevent="retryJob">Retry</button>
             </div>
             <div class="card-body card-bg-secondary" v-if="ready">
                 <div class="row mb-2">

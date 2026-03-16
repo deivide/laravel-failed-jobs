@@ -127,6 +127,22 @@ export default {
                 this.loadJobs();
             }
         },
+
+        /**
+         * Retry the given failed job.
+         */
+        retryJob(uuid) {
+            this.$http.post(FailedJobs.basePath + '/api/' + uuid + '/retry')
+                .then(() => {
+                    this.loadJobs();
+                })
+                .catch(error => {
+                    let message = error.response && error.response.data
+                        ? error.response.data.message
+                        : 'Failed to retry job.';
+                    alert(message);
+                });
+        },
     }
 }
 </script>
@@ -156,6 +172,7 @@ export default {
                 <tr>
                     <th>Job</th>
                     <th>Failed At</th>
+                    <th></th>
                 </tr>
                 </thead>
 
@@ -182,6 +199,9 @@ export default {
 
                     <td class="table-fit">
                         {{ job.failed_at }}
+                    </td>
+                    <td class="table-fit">
+                        <button class="btn btn-outline-primary btn-sm" @click.prevent="retryJob(job.uuid)">Retry</button>
                     </td>
                 </tr>
                 </tbody>

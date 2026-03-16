@@ -3,6 +3,7 @@
 namespace HPWebdeveloper\LaravelFailedJobs\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,6 +59,27 @@ class FailedJobsController extends Controller
         }
 
         return $this->decodeDatabaseJob($failedJob);
+    }
+
+    public function retry($uuid)
+    {
+        $validator = Validator::make(['uuid' => $uuid], [
+            'uuid' => 'required|uuid',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Invalid UUID format'], 400);
+        }
+
+        $failedJob = DB::table('failed_jobs')->where('uuid', $uuid)->first();
+
+        if (!$failedJob) {
+            return response()->json(['message' => 'Job not found'], 404);
+        }
+
+        Artisan::call('queue:retry', ['id' => [$uuid]]);
+
+        return response()->json(['status' => 'success']);
     }
 
     /**
