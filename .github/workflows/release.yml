@@ -18,6 +18,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies and build assets
+        run: |
+          npm ci
+          npm run prod
+
+      - name: Commit built assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f public/app.js public/app.css public/app-dark.css public/mix-manifest.json
+          git commit -m "Build frontend assets [skip ci]" || echo "No asset changes to commit"
+
       - name: Get latest tag
         id: latest_tag
         run: |
@@ -54,5 +71,5 @@ jobs:
         run: |
           version="${{ steps.bump.outputs.version }}"
           git tag "$version"
-          git push origin "$version"
+          git push origin main "$version"
           gh release create "$version" --generate-notes --title "$version"
