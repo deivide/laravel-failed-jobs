@@ -21,7 +21,10 @@ jobs:
       - name: Get latest tag
         id: latest_tag
         run: |
-          tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          # Fetch all tags (including those on detached build commits)
+          git fetch --tags
+          tag=$(git tag -l 'v*' --sort=-v:refname | head -1)
+          tag="${tag:-v0.0.0}"
           echo "tag=$tag" >> $GITHUB_OUTPUT
 
       - name: Determine version bump
@@ -31,7 +34,12 @@ jobs:
           version="${tag#v}"
           IFS='.' read -r major minor patch <<< "$version"
 
-          commits=$(git log "${tag}..HEAD" --pretty=format:"%s" 2>/dev/null || git log --pretty=format:"%s")
+          # Check commit messages for bump keywords
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            commits=$(git log "$(git rev-list -1 "$tag")..HEAD" --pretty=format:"%s" 2>/dev/null || echo "")
+          else
+            commits=$(git log --pretty=format:"%s")
+          fi
 
           if echo "$commits" | grep -qi '\[major\]'; then
             major=$((major + 1))
@@ -45,13 +53,6 @@ jobs:
           fi
 
           new_version="v${major}.${minor}.${patch}"
-
-          # Skip if tag already exists (e.g. from a previous failed run)
-          while git tag -l "$new_version" | grep -q "$new_version"; do
-            patch=$((patch + 1))
-            new_version="v${major}.${minor}.${patch}"
-          done
-
           echo "version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
