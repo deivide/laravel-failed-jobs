@@ -24,14 +24,16 @@ export default {
 
         this.loadJobs();
 
-        this.refreshJobsPeriodically();
+        if (this.$root.autoLoadsNewEntries) {
+            this.startPolling();
+        }
     },
 
     /**
      * Clean after the component is destroyed.
      */
     destroyed() {
-        clearInterval(this.interval);
+        this.stopPolling();
     },
 
 
@@ -44,43 +46,45 @@ export default {
 
             this.loadJobs();
         },
+
+        '$root.autoLoadsNewEntries'(enabled) {
+            if (enabled) {
+                this.startPolling();
+            } else {
+                this.stopPolling();
+            }
+        },
     },
 
 
     methods: {
 
-        /**
-         * Check for new failed jobs.
-         */
-        checkForNewJobs() {
-            if (!this.$root.autoLoadsNewEntries) {
-                this.$http.get(FailedJobs.basePath + `/api/?page=1&perPage=1`)
-                    .then(response => {
-                        const newLatestJob = response.data.data[0];
-                        if (newLatestJob && newLatestJob.uuid !== this.latestJobUuid) {
-                            this.hasNewEntries = true;
-                        }
-                    });
-            }
-        },
-
-
         loadNewEntries() {
             this.page = 1;
             this.loadJobs(false);
             this.hasNewEntries = false;
-            this.latestJobUuid = null; // Reset latest job UUID
+            this.latestJobUuid = null;
         },
 
 
         /**
-         * Refresh the jobs every period of time.
+         * Start polling for new jobs.
          */
-        refreshJobsPeriodically() {
+        startPolling() {
+            this.stopPolling();
             this.interval = setInterval(() => {
-                this.checkForNewJobs(); // Check for new jobs
-                this.loadJobs(true); // Load jobs without resetting the ready state
+                this.loadJobs(true);
             }, 3000);
+        },
+
+        /**
+         * Stop polling for new jobs.
+         */
+        stopPolling() {
+            if (this.interval) {
+                clearInterval(this.interval);
+                this.interval = null;
+            }
         },
 
         /**

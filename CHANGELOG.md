@@ -18,6 +18,7 @@
 
 ### Fixed
 - Auto Load Entries toggle not disabling when clicked again
+- Auto Load Entries polling starting automatically on page load instead of only when enabled
 - Release workflow tag detection for tags on detached build commits
 
 ## [v1.0.0](https://github.com/hpwebdeveloper) - 2024-01-16
