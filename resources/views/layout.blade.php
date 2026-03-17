@@ -47,21 +47,8 @@
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="col-2 sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <router-link active-class="active" to="/" class="nav-link d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Dashboard</span>
-                        </router-link>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-10">
+        <div class="mt-4">
+            <div>
                 @if (! $assetsAreCurrent)
                     <div class="alert alert-warning">
                         The published FaildJobs assets are not up-to-date with the installed version. To update, run:<br/><code>php artisan failedjobs:publish</code>
