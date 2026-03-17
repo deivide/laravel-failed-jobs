@@ -45,6 +45,13 @@ jobs:
           fi
 
           new_version="v${major}.${minor}.${patch}"
+
+          # Skip if tag already exists (e.g. from a previous failed run)
+          while git tag -l "$new_version" | grep -q "$new_version"; do
+            patch=$((patch + 1))
+            new_version="v${major}.${minor}.${patch}"
+          done
+
           echo "version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
