@@ -1,16 +1,16 @@
 # Release Notes
 
-## [Unreleased]
+## [v0.0.4](https://github.com/deivide/laravel-failed-jobs/releases/tag/v0.0.4) - 2026-03-17
 
 ### Fixed
 - Auto Load Entries polling starting automatically on page load instead of only when enabled
 
-## [v0.0.3](https://github.com/deivide/laravel-failed-jobs/releases/tag/v0.0.3) - 2026-03-17
+## [v0.0.3](https://github.com/deivide/laravel-failed-jobs/releases/tag/v0.0.3) - 2026-03-16
 
 ### Fixed
 - Auto Load Entries toggle not disabling when clicked again
 
-## [v0.0.2](https://github.com/deivide/laravel-failed-jobs/releases/tag/v0.0.2) - 2026-03-17
+## [v0.0.2](https://github.com/deivide/laravel-failed-jobs/releases/tag/v0.0.2) - 2026-03-16
 
 ### Added
 - UUID field displayed in job detail page below ID
